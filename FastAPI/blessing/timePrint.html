@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>节日祝福</title>
+		<link rel="stylesheet" href="http://127.0.0.1/blessing/style.css">
+	</head>
+	<body>
+		<!-- partial:index.partial.html -->
+		<div class="container">
+			<p id = "blessing" style="color: rgb(202, 227, 103); font-size: 25px;"></p>
+			<p id = "time" style="color:rgb(255, 153, 51); font-size: 25px;">YYYY-mm-dd hh:mm:ss</p>
+			<div class="inner-container">
+				<div class="shape">
+					<!--
+					<div class="title">
+						<h1>www.bootstrapmb.com</h1> 
+						<a class="button" href="#">停止浮动</a>
+					</div>
+					-->
+				</div>
+
+			</div>
+		</div>
+		<!-- partial -->
+		<script>
+			// 闹钟
+			var cl = self.setInterval("clock()",500);
+			// 发http请求,，是否能跨域是服务端决定的
+			function clock() {
+				var httpRequest = new XMLHttpRequest();
+				httpRequest.open('GET', '/time');
+				// httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
+				httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				httpRequest.send(null);
+				// 显示结果
+				httpRequest.onreadystatechange = function() {
+					if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+						var json = httpRequest.responseText;
+						var p = document.getElementById('time')
+						txt = JSON.parse(json).time
+						p.innerHTML = txt
+					}
+				}
+			}
+
+			clock()
+
+			function printBlessing() {
+				var httpRequest = new XMLHttpRequest();
+				httpRequest.open("GET", "/blessing")
+				httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+				httpRequest.send(null);
+				
+				httpRequest.onreadystatechange = function() {
+					if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+						var json = httpRequest.responseText
+						var p = document.getElementById("blessing")
+						name = JSON.parse(json).name
+						blessing = JSON.parse(json).blessing
+
+						p.innerHTML = name  + ": " + blessing
+					}
+				}
+			}
+			
+			printBlessing()
+		</script>
+		<!-- 这是本地提供的服务，在服务端是不能访问http://127.0.0.1 的 -->
+		<!-- 如果要想访问到，必须放到公网上，或在域内访问。参考FastHTTP -->
+		<script src='http://127.0.0.1/blessing/jquery.min.js'></script>
+		<script src="http://127.0.0.1/blessing/script.js"></script>
+	</body>
+</html>
