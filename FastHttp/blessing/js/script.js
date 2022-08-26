@@ -35,27 +35,27 @@ function getBlessing() {
 getBlessing()
 
 // jQuery
-$(document).ready(function() {
+// $(document).ready(function() {
 
-    var html = '';
-    for (var i = 1; i <= 50; i ++) {
-        html += '<div class="shape-container--'+i+' shape-animation"><div class="random-shape"></div></div>';
-    }
+//     var html = '';
+//     for (var i = 1; i <= 50; i ++) {
+//         html += '<div class="shape-container--'+i+' shape-animation"><div class="random-shape"></div></div>';
+//     }
       
-    document.querySelector('.shape').innerHTML += html;
+//     document.querySelector('.shape').innerHTML += html;
     
-    var $allShapes = $("[class*='shape-container--']");
-    $('.button').click(function (event) {
-        $allShapes.toggleClass("stop-shape");
-        var $this = $(this);
-        $this.toggleClass('.button');
-        if($this.hasClass('.button')){
-            $this.text('开始浮动');         
-        } else {
-            $this.text('停止浮动');
-        }
-        event.preventDefault();
-    });
+//     var $allShapes = $("[class*='shape-container--']");
+//     $('.button').click(function (event) {
+//         $allShapes.toggleClass("stop-shape");
+//         var $this = $(this);
+//         $this.toggleClass('.button');
+//         if($this.hasClass('.button')){
+//             $this.text('开始浮动');         
+//         } else {
+//             $this.text('停止浮动');
+//         }
+//         event.preventDefault();
+//     });
     
-});
+// });
 
