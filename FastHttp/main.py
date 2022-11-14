@@ -21,7 +21,7 @@ def get_root():
     html_file = open("./blessing/index.html", "r").read()
     return html_file
 
-@app.get("/blessing")
+@app.get("/blessing")       // 默认返回的类型是Json类型的数据
 def get_blessing():
     return {"name": "Lun", "blessing": "Happy Chinese Valentine's day"}
 
