@@ -21,7 +21,7 @@ def get_root():
     html_file = open("./blessing/index.html", "r").read()
     return html_file
 
-@app.get("/blessing")       // 默认返回的类型是Json类型的数据
+@app.get("/blessing")       # 默认返回的类型是Json类型的数据
 def get_blessing():
     return {"name": "Lun", "blessing": "Happy Chinese Valentine's day"}
 
@@ -30,8 +30,7 @@ def get_time():
     now_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return {"time": now_time}
 
-# resource
-
+# load static resource
 # @app.get("/style.css", response_class=PlainTextResponse)
 # def get_style():
 #     style_file = open("./blessing/css/style.css", "r").read()

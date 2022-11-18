@@ -1,0 +1,48 @@
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <!--没有为/static/img/ico.jpg资源创建url，但可以访问，是否默认做了处理-->
+    <link rel="shortcut icon" href="/static/img/ico.jpg">
+    <title>Flask App</title>
+    <style>
+        .head {
+            /* 浮动，都在一行靠左摆放。多个标签想要放在一行，就使用float属性 */
+            float: left;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height:30px">
+        <div class="head" style='color: orange; font-size: 15px;'>Welcome to my first flask web page.</div>
+        <div class="head">
+            {% if session['username'] != '' %}
+            <a href="#">{{session['username']}}</a>
+            <a href="/logoff">注销</a>
+            {% else %}
+            <!--url_for的好处：当后端代码中的url改变时，不用在html文件中改url。url_for通过方法找到url-->
+            <a href="{{url_for('loginpage')}}">登录</a>
+            <!--通过 loginpage 方法名 找到 /login url-->
+            <a href="/signup">注册</a>
+            {% endif %}
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <!-- 为/static/img/main.jpg资源创建url -->
+    <img src="{{url_for('static', filename='img/main.jpg')}}">
+    <hr>
+    <ul>
+        <li><a href="/news">查看新闻</a></li>
+        <li><a href="/products">查看产品</a></li>
+        <li><a href="{{url_for('pagesargspage', a=50)}}">页参数</a></li>
+        <!--和 /pagesargs/50 是一样的结果-->
+    </ul>
+    <!--data变量，接收render_templates传过来的参数--->
+    <p>{{data}}</p>
+    
+</body>
+
+</html>

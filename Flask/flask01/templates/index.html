@@ -1,20 +1,48 @@
 <html>
-    <head>
-        <title>Flask App</title>
-        <style type="text/css">
-            .wel {
-                font-size: 20px;
-                color: burlywood;
-                position: absolute;
-                left: 50%;
-                width: 30%;
-                margin-left: -15%;
-                text-align: center;
-                line-height: 100px;
+
+<head>
+    <title>Flask App</title>
+    <style type="text/css">
+        .wel {
+            font-size: 20px;
+            color: burlywood;
+            position: absolute;
+            left: 50%;
+            width: 30%;
+            margin-left: -15%;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="wel">Welcome to Flask World.</p>
+    <p id="date"></p>
+    <script>
+        function updateDate() {
+            const http = new XMLHttpRequest();
+            const url = "./date";
+            http.open("GET", url);
+            http.send()
+
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    date = http.responseText;
+                    document.getElementById("date").innerHTML = date;
+                }
             }
-        </style>
-    </head>
-    <body>
-        <p class="wel">Welcome to Flask World.</p>
-    </body>
+
+        }
+        // updateDate();
+        // setInterval(updateDate,500)
+
+        function localUpdateDate() {
+            document.getElementById("date").innerHTML = new Date().toLocaleString('chinese', { hour12: false });
+        }
+        localUpdateDate();
+        setInterval(localUpdateDate, 500);
+    </script>
+</body>
+
 </html>
